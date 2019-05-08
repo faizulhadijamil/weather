@@ -20,8 +20,9 @@ class HomeScreen extends React.Component {
           // hardcode:- singapore latitude longitude
           latitude:1.351616,
           longitude:103.808053,
+          city:'',
           forecast: [],
-          todayForecast: null,
+          currentData: null,
           fetchWeatherError:false,
           fWErrorMsg:'',
         };
@@ -60,13 +61,14 @@ class HomeScreen extends React.Component {
             }
             // todo: to put other condition
             else{
-                // console.log('weatherData: ', data);
+                console.log('weatherData: ', data);
                 // var itemData = data.list.filter(item => item.dt_txt === '2019-05-05');
                 // console.log('itemData: ', itemData);
 
                 this.setState((prevState, props) => ({
+                    city: data.city.name,
                     forecast: data,
-                    todayForecast: data.list[0], 
+                    currentData: data.list[0], 
                     isLoading:false,
                 }));
             }
@@ -137,15 +139,15 @@ class HomeScreen extends React.Component {
     }
 
     renderTodayWeather(){
-        console.log('renderTodayWeather: ', this.state.todayForecast);
+        console.log('renderTodayWeather: ', this.state.currentData);
 
         return(
             <View style = {{alignItems:'center'}}>
                 <Text style = {styles.TempHeaderText}>
-                    {Math.round(this.state.todayForecast.main.temp)}
+                    {Math.round(this.state.currentData.main.temp)}
                 </Text>
                 <Text style = {styles.TempsubHeadText}>
-                    {this.state.todayForecast.weather[0].description}
+                    {this.state.currentData.weather[0].description}
                 </Text>
             </View>
             

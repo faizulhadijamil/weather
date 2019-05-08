@@ -15,6 +15,10 @@ export default class ForecastCard extends Component {
         return (days[theDay]);
     }
 
+    onCardPress(theProps) {
+        // console.log('onCardPress: ', theProps);
+    }
+
 	render() {
 
         let deviceWidth = Dimensions.get('window').width;
@@ -39,7 +43,10 @@ export default class ForecastCard extends Component {
 
         var dateText = day + ' ' +theMonth + ' ' + year + ', ' + theDay;
 		return (
-            <TouchableOpacity style = {{marginVertical:5, flex:1, flexDirection:'row', alignItems:'center', padding:10, width:deviceWidth-40, justifyContent:'space-between', borderBottomWidth: 1 / PixelRatio.get(), borderColor:'gray'}}>
+            <TouchableOpacity 
+                style = {{marginVertical:5, flex:1, flexDirection:'row', alignItems:'center', padding:10, width:deviceWidth-40, justifyContent:'space-between', borderBottomWidth: 1 / PixelRatio.get(), borderColor:'gray'}}
+                onPress = {()=>{this.onCardPress(this.props)}}
+            >
                 <View>
                     <Text style = {styles.dateTxt}>
                         {dateText}
@@ -57,21 +64,6 @@ export default class ForecastCard extends Component {
                     color={'#f4511e'} 
                 />
             </TouchableOpacity>
-			// <Card containerStyle={styles.card}>
-            //     <Text style={styles.notes}>{this.props.location}</Text>
-				
-			// 	<View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-			// 		<Image style={{width:100, height:100}} source={{uri:"https://openweathermap.org/img/w/" + this.props.detail.weather[0].icon + ".png"}} />
-			// 		<Text style={styles.time}>{time}</Text>
-			// 	</View>
-
-			// 	<Divider style={{ backgroundColor: '#dfe6e9', marginVertical:20}} />
-				
-			// 	<View style={{flexDirection:'row', justifyContent:'space-between'}}>
-			// 		<Text style={styles.notes}>{this.props.detail.weather[0].description}</Text>
-			// 		<Text style={styles.notes}>{Math.round( this.props.detail.main.temp * 10) / 10 }&#8451;</Text>
-			// 	</View>
-			// </Card>
 		);
 	}
 }
